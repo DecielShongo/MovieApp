@@ -2,6 +2,7 @@ import {ActivityIndicator, FlatList, Image, ScrollView, Text, View} from "react-
 import {images} from "@/constants/images";
 import {icons} from "@/constants/icons";
 import SearchBar from "@/components/SearchBar";
+import MovieCard from "@/components/MovieCard";
 import {useRouter} from "expo-router";
 import {fetchMovies} from "@/services/api";
 import useFetch from "@/services/useFetch";
@@ -56,9 +57,24 @@ const Index = () => {
                             <>
                                 <Text className="text-lg text-white mt-5 mb-3 font-bold">Latest Movies</Text>
                                 <FlatList data={movies} renderItem={({item}) => (
-                                    <Text className="text-white text-sm">{item.title}</Text>
-                                )}/>
+                                    <MovieCard
+                                        {...item}
+                                    />
+                                )}
+                                    keyExtractor={(item) => item.id.toString()}
+                                    numColumns={3}
+                                    scrollEnabled={false}
+                                    columnWrapperStyle={{
+                                        justifyContent: 'flex-start',
+                                        gap: 20,
+                                        paddingRight: 5,
+                                        marginBottom: 10
+                                    }}
+                                    className="pb-32 mt-2"
+
+                                />
                             </>
+
                         </View>
                     )}
 
